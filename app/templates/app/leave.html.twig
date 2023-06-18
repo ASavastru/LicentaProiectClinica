@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block javascripts %}
+{#    <script src="{{ asset('scripts/ORICE JS.js') }}" defer></script>#}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('styles/navigation.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/leave.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    {% include 'app/menu.html.twig'%}
+
+{% endblock %}

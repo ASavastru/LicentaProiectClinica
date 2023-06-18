@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User List{% endblock %}
+
+{% block stylesheets %}
+        <link href="{{ asset('styles/navigation.css') }}" rel="stylesheet">
+        <link href="{{ asset('styles/userlist.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('scripts/userlist.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+{% endblock %}
+
+{% block body %}
+
+    {% include 'app/menu.html.twig' %}
+
+    <div id="user-list"></div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Timekeeping{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('styles/navigation.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/timekeeping.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('scripts/timekeeping.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    {% include 'app/menu.html.twig' %}
+
+    <div id="error-container"></div>
+
+    <form id="timekeeping-form" action="{{ path('timekeeping_create') }}" method="post">
+        <label for="work_interval">Work Interval (in hours):</label>
+        <input type="number" id="work_interval" name="work_interval" min="1" max="24" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="timekeeping-container">
+        <!-- Timekeeping records will be dynamically rendered here -->
+    </div>
+
+{% endblock %}

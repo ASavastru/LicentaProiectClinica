@@ -21,6 +21,39 @@ class LeaveRepository extends ServiceEntityRepository
         parent::__construct($registry, Leave::class);
     }
 
+    public function findPendingByUser(User $user): array
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.user = :user')
+            ->andWhere('l.status = :status')
+            ->setParameter('user', $user)
+            ->setParameter('status', Leave::STATUS_PENDING)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findApprovedByUser(User $user): array
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.user = :user')
+            ->andWhere('l.status = :status')
+            ->setParameter('user', $user)
+            ->setParameter('status', Leave::STATUS_APPROVED)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findUnapprovedByUser(User $user): array
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.user = :user')
+            ->andWhere('l.status = :status')
+            ->setParameter('user', $user)
+            ->setParameter('status', Leave::STATUS_UNAPPROVED)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function save(Leave $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

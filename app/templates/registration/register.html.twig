@@ -2,6 +2,10 @@
 
 {% block title %}Register{% endblock %}
 
+{% block stylesheets %}
+    <link href="{{ asset('styles/registration.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
@@ -10,12 +14,38 @@
     <h1>Register</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.email, {
+            label: 'Email'
+        }) }}
+        {{ form_row(registrationForm.username, {
+            label: 'Username'
+        }) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.firstName, {
+            label: 'First Name'
+        }) }}
+        {{ form_row(registrationForm.lastName, {
+            label: 'Last Name'
+        }) }}
+        {{ form_row(registrationForm.uniqueIdCode, {
+            label: 'CNP/CID/CE/PASS'
+        }) }}
+        {{ form_row(registrationForm.age, {
+            label: 'Age'
+        }) }}
+        {{ form_row(registrationForm.citizenship, {
+            label: 'Citizenship'
+        }) }}
+        {{ form_row(registrationForm.isInsured, {
+            label: 'Are You Insured?'
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
+        <button class="btn btn-lg btn-primary" onclick="window.location.href='/login'" type="button">
+            Login
+        </button>
     {{ form_end(registrationForm) }}
 {% endblock %}

@@ -43,6 +43,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setBehaviour("PATIENT");
+            $user->setCreatedAt(new \DateTimeImmutable());
+
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -57,11 +60,13 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
+            return $this->redirectToRoute('app_login');
+
+//            return $userAuthenticator->authenticateUser(
+//                $user,
+//                $authenticator,
+//                $request
+//            );
         }
 
         return $this->render('registration/register.html.twig', [

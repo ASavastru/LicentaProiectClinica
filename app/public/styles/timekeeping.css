@@ -1,0 +1,125 @@
+/* Reset default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Set dimensions for the form */
+form {
+    width: 300px;
+    padding: 20px;
+    margin-left: 50px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #561F37;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+    background-color: #50687e;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Timekeeping records container styles */
+#timekeeping-container {
+    margin-top: 40px;
+}
+
+/* Timekeeping record styles */
+#timekeeping-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#timekeeping-container li {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#timekeeping-container li span {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#timekeeping-container li span:first-child {
+    color: #561F37;
+}
+
+#timekeeping-container li span:nth-child(2n) {
+    color: #777;
+}
+
+/* User list container styles */
+#user-list {
+    margin-top: 40px;
+}
+
+/* User list item styles */
+#user-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#user-list li {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#user-list li span {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#user-list li span:first-child {
+    color: #561F37;
+}
+
+#user-list li span:nth-child(2n) {
+    color: #777;
+}

@@ -14,8 +14,7 @@ class Timekeeping
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $practitioner = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

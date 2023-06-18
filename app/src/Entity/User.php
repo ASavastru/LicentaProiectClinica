@@ -239,7 +239,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->citizenship;
     }
 
-    public function setCitienship(string $citizenship): self
+    public function setCitizenship(string $citizenship): self
     {
         $this->citizenship = $citizenship;
 

@@ -39,6 +39,22 @@ class TimekeepingRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByPractitionerIdAndDateRange(int $practitionerId, \DateTimeInterface $startDate, \DateTimeInterface $endDate): array
+    {
+        $qb = $this->createQueryBuilder('t');
+        $qb->where('t.practitioner = :practitionerId')
+            ->andWhere('t.start >= :startDate')
+            ->andWhere('t.end <= :endDate')
+            ->setParameter('practitionerId', $practitionerId)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->orderBy('t.start', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+
 //    /**
 //     * @return Timekeeping[] Returns an array of Timekeeping objects
 //     */

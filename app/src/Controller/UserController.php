@@ -2,31 +2,100 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    #[Route(path: '/user', name: 'user_list', methods: ['GET'])]
+    public function userList(): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('app/user_list.html.twig', []);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): void
+    #[Route(path: '/user/list', methods: ['POST'])]
+    public function patientPractitionerPrevCheck(EntityManagerInterface $entityManager, Security $security): JsonResponse
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        // Get the currently logged-in user
+        $currentUser = $security->getUser();
+
+        // Check if the current user is a practitioner
+        $isPractitioner = in_array('ROLE_PRACTITIONER', $currentUser->getRoles());
+
+        // Get the practitioner's ID
+        $practitionerId = $currentUser->getId();
+
+        // Retrieve users who have had past appointments with the practitioner
+        $query = $entityManager->createQuery(
+            'SELECT u.id, u.firstName, u.lastName
+        FROM App\Entity\User u
+        JOIN App\Entity\Appointment a WITH u = a.patient
+        WHERE a.practitioner = :practitioner
+        AND a.date <= CURRENT_DATE()'
+        );
+        $query->setParameter('practitioner', $currentUser);
+        $users = $query->getResult();
+
+        // Return the list of users, the currently logged-in user, and the practitioner flag as a JSON response
+        return new JsonResponse([
+            'users' => $users,
+            'currentUser' => [
+                'id' => $currentUser->getId()
+            ],
+            'isPractitioner' => $isPractitioner,
+        ]);
     }
+
+
+
+    #[Route(path: '/user/create', name: 'user_create_render', methods: ['GET'])]
+    public function userCreateRender(): Response
+    {
+        return $this->render('app/user.html.twig', []);
+    }
+
+    #[Route(path: '/user/create', name: 'user_create_process', methods: ['POST'])]
+    public function userCreateProcess(): Response
+    {
+        return $this->render('app/user.html.twig', []);
+    }
+
+    #[Route(path: '/user/read', name: 'user_read_render', methods: ['GET'])]
+    public function userReadRender(): Response
+    {
+        return $this->render('app/user.html.twig', []);
+    }
+
+    #[Route(path: '/user/read', name: 'user_read_process', methods: ['POST'])]
+    public function userReadProcess(): Response
+    {
+        return $this->render('app/user.html.twig', []);
+    }
+
+    #[Route(path: '/user/update', name: 'user_update_render', methods: ['GET'])]
+    public function userUpdateRender(): Response
+    {
+        return $this->render('app/user.html.twig', []);
+    }
+
+    #[Route(path: '/user/update', name: 'user_update_process', methods: ['POST'])]
+    public function userUpdateProcess(): Response
+    {
+        return $this->render('app/user.html.twig', []);
+    }
+
+    #[Route(path: '/user/delete', name: 'user_delete', methods: ['POST'])]
+    public function userDelete(): Response
+    {
+        return $this->render('app/user.html.twig', []);
+    }
+
+
+
 }

@@ -1,0 +1,14 @@
+{% extends 'app/base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('styles/navigation.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/home.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    {% include 'app/menu.html.twig'%}
+
+{% endblock %}

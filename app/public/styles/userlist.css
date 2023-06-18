@@ -1,0 +1,32 @@
+/* User list container styles */
+#user-list {
+    margin-top: 40px;
+}
+
+/* User list item styles */
+#user-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#user-list li {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#user-list li span {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#user-list li span:first-child {
+    color: #561F37;
+}
+
+#user-list li span:nth-child(2n) {
+    color: #777;
+}
+

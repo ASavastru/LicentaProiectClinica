@@ -2,6 +2,10 @@
 
 {% block title %}Log in!{% endblock %}
 
+{% block stylesheets %}
+    <link href="{{ asset('styles/login.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
 <form method="post">
     {% if error %}
@@ -37,6 +41,9 @@
 
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
+    </button>
+    <button class="btn btn-lg btn-primary" onclick="window.location.href='/register'" type="button">
+        Register
     </button>
 </form>
 {% endblock %}
