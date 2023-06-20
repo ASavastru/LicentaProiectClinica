@@ -17,40 +17,57 @@ use Symfony\Component\Validator\Constraints\Time;
 class TimekeepingController extends AbstractController
 {
     #[Route(path: '/timekeeping', name: 'timekeeping_list', methods: ['GET'])]
-    public function timekeepingList(EntityManagerInterface $entityManager): Response
+    public function timekeepingList(): Response
     {
-        $timekeepingRecords = $entityManager->getRepository(Timekeeping::class)->findBy([], ['start' => 'DESC']);
-
-        return $this->render('app/timekeeping.html.twig', [
-            'timekeepingRecords' => $timekeepingRecords,
-        ]);
+        return $this->render('app/timekeeping.html.twig');
     }
+
+    #[Route(path: '/timekeeping/retrieve', name: 'timekeeping_retrieve', methods: ['GET'])]
+    public function retrieveTimekeeping(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $currentUserId = $this->getUser()->getId();
+
+        $timekeepingRecords = $entityManager->getRepository(Timekeeping::class)->findBy(
+            ['practitioner' => $currentUserId],
+            ['start' => 'DESC']
+        );
+
+        return $this->json(['timekeepingRecords' => $timekeepingRecords]);
+    }
+
 
     #[Route(path: '/timekeeping/create', name: 'timekeeping_create', methods: ['POST'])]
     public function createTimekeeping(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $timezone = new \DateTimeZone('Europe/Bucharest');
+        $workHours = $request->request->getInt('work_interval');
 
-        $start = new \DateTime('now', $timezone);
-        $workInterval = $request->request->get('work_interval');
-        $interval = new \DateInterval('PT' . $workInterval . 'H');
-
-        $end = (clone $start)->add($interval);
-
-        // Check if the end time rolls over to the next day
-        if ($end->format('Y-m-d') !== $start->format('Y-m-d')) {
-            $end = $end->setTime(23, 59, 59);
+        if ($workHours < 1 || $workHours > 24) {
+            return $this->json(['error' => 'Invalid work interval']);
         }
 
-        $practitionerId = $this->getUser()->getId();
+        $timezone = new \DateTimeZone('Europe/Bucharest');
+        $start = new \DateTime('now', $timezone);
+        $end = (clone $start)->add(new \DateInterval('PT' . $workHours . 'H'));
 
-        $existingRecord[] = $entityManager->getRepository(Timekeeping::class)->findAll([
-            'practitioner' => $practitionerId,
-            'start' => $start,
-            'end' => $end,
-        ]);
-        
-        if ($existingRecord[0] == []) {
+        $practitionerId = $this->getUser()->getId();
+        $startDate = clone $start;
+        $startDate->setTime(0, 0, 0);
+        $endDate = clone $start;
+        $endDate->setTime(23, 59, 59);
+
+        $existingRecord = $entityManager->createQueryBuilder()
+            ->select('t')
+            ->from(Timekeeping::class, 't')
+            ->where('t.practitioner = :practitionerId')
+            ->andWhere('t.start >= :startDate')
+            ->andWhere('t.start <= :endDate')
+            ->setParameter('practitionerId', $practitionerId)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->getQuery()
+            ->getResult();
+
+        if (!$existingRecord) {
             // Create a new Timekeeping entity
             $timekeeping = new Timekeeping();
             $timekeeping->setPractitioner($this->getUser());
@@ -60,12 +77,11 @@ class TimekeepingController extends AbstractController
             // Persist the timekeeping record
             $entityManager->persist($timekeeping);
             $entityManager->flush();
-        } else {
-            // Return a JSON response indicating a duplicate record
-            return $this->json(['duplicateRecord' => true]);
+
+            return $this->redirectToRoute('timekeeping_list');
         }
 
-        return $this->redirectToRoute('timekeeping_list');
+        return $this->json(['duplicateRecord' => true]);
     }
 
     #[Route(path: '/timekeeping/read', name: 'timekeeping_read', methods: ['GET'])]

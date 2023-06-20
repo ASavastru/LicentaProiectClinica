@@ -1,13 +1,15 @@
 // Function to retrieve the timekeeping records
-async function retrieveTimekeepingRecords() {
-    try {
-        const response = await axios.get('/timekeeping/read');
-        const { timekeepingRecords } = response.data;
-        renderTimekeepingRecords(timekeepingRecords);
-    } catch (error) {
-        console.error('Error:', error);
-    }
+function retrieveTimekeepingRecords() {
+    axios.get('/timekeeping/retrieve')
+        .then(response => {
+            const timekeepingRecords = response.data.timekeepingRecords;
+            renderTimekeepingRecords(timekeepingRecords);
+        })
+        .catch(error => {
+            console.error(error);
+        });
 }
+
 
 // Function to render the timekeeping records in the DOM
 function renderTimekeepingRecords(timekeepingRecords) {

@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Leave{% endblock %}
 
 {% block javascripts %}
-{#    <script src="{{ asset('scripts/ORICE JS.js') }}" defer></script>#}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('path/to/your/script.js') }}" defer></script>
 {% endblock %}
 
 {% block stylesheets %}
@@ -15,5 +14,16 @@
 {% block body %}
 
     {% include 'app/menu.html.twig'%}
+
+    <div class="leave-container">
+        <h1>Leave Request</h1>
+        <form id="leave-form">
+            <!-- Your form fields here -->
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
 
 {% endblock %}

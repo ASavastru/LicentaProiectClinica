@@ -1,9 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}About Us{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('scripts/calendar.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('styles/navigation.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/about.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
 
-<div>pula</div>
+    {% include 'app/menu.html.twig' %}
+
+    <div class="about-container">
+        <h1>About Us</h1>
+        <br>
+        <div class="clinic-info">
+            <h2>Welcome to our Psychiatric Clinic</h2>
+            <br>
+            <p>At our Psychiatric Clinic, we are dedicated to providing comprehensive mental health care and support to our patients. We understand the challenges and complexities of mental health and strive to offer personalized treatment plans tailored to each individual's needs.</p>
+            <br>
+            <p>Our team of experienced psychiatrists, psychologists, therapists, and support staff is committed to helping patients achieve optimal mental well-being. We offer a wide range of services, including diagnostic evaluations, counseling, psychotherapy, medication management, and more.</p>
+            <br>
+            <p>At our clinic, we believe in the power of collaboration and work closely with patients to develop effective strategies for managing their mental health. We aim to empower individuals to lead fulfilling and meaningful lives, free from the limitations imposed by mental health challenges.</p>
+            <br>
+            <p>Whether you are seeking treatment for anxiety, depression, bipolar disorder, or any other mental health condition, our dedicated team is here to support you on your journey towards recovery and well-being.</p>
+            <br>
+            <p>Thank you for choosing Clinica Mintii. We look forward to serving you and assisting you in achieving optimal mental health.</p>
+        </div>
+        <h2 style="text-align: center">Meet Our Team</h2>
+        <br>
+        <div class="team-info">
+            <br/>
+            <div class="team-member">
+                <img src="{{ asset('images/doctor1.png') }}" alt="Doctor 1">
+                <h3>Dr. Alexandru Savastru</h3>
+                <p>Psychiatrist</p>
+            </div>
+            <div class="team-member">
+                <img src="{{ asset('images/doctor2.png') }}" alt="Doctor 2">
+                <h3>Dr. Anastasia Directoire</h3>
+                <p>Psychiatrist</p>
+            </div>
+            <div class="team-member">
+                <img src="{{ asset('images/doctor3.png') }}" alt="Doctor 3">
+                <h3>Dr. Sorin Mihailescu</h3>
+                <p>Psychiatrist</p>
+            </div>
+            <div class="team-member">
+                <img src="{{ asset('images/doctor4.png') }}" alt="Doctor 3">
+                <h3>Dr. Mirela Dragomir</h3>
+                <p>Psychiatrist</p>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

@@ -51,14 +51,16 @@ label {
 }
 
 .btn-primary {
+    transition: 0.3s;
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #50687e;
+    border-color: #2c3c4b;
 }
 
 .btn-primary:hover {
-    background-color: #0069d9;
-    border-color: #0062cc;
+    transition: 0.3s;
+    background-color: #2c3c4b;
+    border-color: #50687e;
 }
 
 h1 {

@@ -10,6 +10,36 @@
     display: flex;
 }
 
+/* Practitioner list styles */
+.practitioner-drop-down {
+    margin-top: 20px;
+}
+
+#practitioner-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#practitioner-list li {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#practitioner-list li:hover {
+    background-color: #ddd;
+}
+/* Main container styles */
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 /* Main calendar container styles */
 .main-calendar-container {
     flex: 1;
@@ -129,8 +159,8 @@
 .main-day-container {
     flex: 1;
     background-color: #f2f2f2;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 10px;
+    margin-top: 40px;
     margin-right: 100px;
 }
 
@@ -139,7 +169,7 @@
 }
 
 .main-day-container li {
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
     display: flex;
@@ -147,6 +177,122 @@
 }
 
 .main-day-container li div {
-    font-size: 12px;
+    font-size: 15px;
     color: #777;
 }
+
+/* Practitioner list styles */
+#practitioner-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#practitioner-list li {
+    transition: 0.3s;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+#practitioner-list li.activePractitioner {
+    background-color: #561F37;
+    color: #fff;
+}
+
+#practitioner-list li:not(.activePractitioner):hover {
+    transition: 0.3s;
+    background-color: #50687e;
+    color: #F7F7F2;
+}
+
+#practitioner-list li.inactivePractitioner {
+    background-color: #ccc;
+    color: #999;
+}
+
+#practitioner-list li span {
+    font-size: 24px;
+    color: #777;
+}
+
+.delete-button {
+    transition: 0.3s;
+    background-color: #561F37;
+    color: #F7F7F2;
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    transition: 0.3s;
+    background-color: #250814;
+    color: #F7F7F2;
+}
+
+.create-button {
+    transition: 0.3s;
+    background-color: #50687e;
+    color: #F7F7F2;
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+.create-button:hover {
+    transition: 0.3s;
+    background-color: #2c3c4b;
+    color: #F7F7F2;
+}
+
+.div-patient-data{
+    padding-top: 5px;
+}
+
+/* Popup container */
+.patient-list {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    backdrop-filter: blur(5px);
+}
+
+/* Popup list items */
+.patient-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.patient-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.patient-list li:hover {
+    background-color: #f5f5f5;
+}
+
+/* Popup close button */
+.patient-list .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.patient-list .close-button:hover {
+    color: #f00;
+}
+

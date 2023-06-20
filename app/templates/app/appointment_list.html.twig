@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Schedule{% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('scripts/calendar.js') }}" defer></script>
@@ -14,9 +14,18 @@
 
 {% block body %}
 
+    <script>
+        let practitionerIdCurrent = {{ app.user.id }};
+    </script>
+
     {% include 'app/menu.html.twig'%}
 
     <div class="main-container">
+        {% if 'ROLE_PRACTITIONER' not in app.user.roles %}
+            <div class="practitioner-drop-down">
+                <ul id="practitioner-list"></ul>
+            </div>
+        {% endif %}
         <div class="main-calendar-container">
             <div class="calendar-container">
                 <header class="calendar-header">
@@ -62,6 +71,13 @@
                 <li>18:00<div></div></li>
                 <li>19:00<div></div></li>
                 <li>20:00<div></div></li>
+            </ul>
+        </div>
+        <div class="patient-list" id="patient-list" style="display: none">
+            <ul>
+                {% for patient in patients %}
+                <li data-id="{{ patient.id }}">{{ patient.firstName }} {{ patient.lastName }}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>

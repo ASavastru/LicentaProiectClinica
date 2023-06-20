@@ -6,36 +6,24 @@
         <li>
             <a href="{{ path('home') }}">Home</a>
         </li>
-        {% for role in app.user.roles %}
-            {% if ( role == 'ROLE_PRACTITIONER' ) %}
-                <li>
-                    <a href="{{ path('appointment_list') }}">Timekeeping</a>
-                </li>
-            {% endif %}
-            {% if ( role == 'ROLE_SECRETARY' ) %}
-                <li>
-                    <a href="{{ path('appointment_list_secretary') }}">Timekeeping</a>
-                </li>
-            {% endif %}
-        {% endfor %}
         <li>
             <a href="{{ path('appointment_list') }}">Schedule</a>
         </li>
-        <li>
-            <a href="{{ path('user_list') }}">Patient Data</a>
-        </li>
+{#        <li>#}
+{#            <a href="{{ path('user_list') }}">Patient Data</a>#}
+{#        </li>#}
         {% for role in app.user.roles %}
             {% if ( role == 'ROLE_PRACTITIONER' ) or ( role == 'ROLE_SECRETARY' )%}
                 <li>
                     <a href="{{ path('timekeeping_list') }}">Timekeeping</a>
                 </li>
-                <li>
-                    <a href="{{ path('leave_list') }}">Leave</a>
-                </li>
+{#                <li>#}
+{#                    <a href="{{ path('leave_list') }}">Leave</a>#}
+{#                </li>#}
             {% endif %}
         {% endfor %}
         <li>
-            <a href="{{ path('about') }}">Support</a>
+            <a href="{{ path('about') }}">About Us</a>
         </li>
         <li>
             <a href="{{ path('app_logout') }}">Logout</a>
