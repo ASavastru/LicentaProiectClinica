@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+body {
+    background-color: #F7F7F2;
+}
+
 /* Main container styles */
 .main-container {
     display: flex;
@@ -12,7 +16,7 @@
 
 /* Practitioner list styles */
 .practitioner-drop-down {
-    margin-top: 20px;
+    margin-top: 150px;
 }
 
 #practitioner-list {
@@ -54,6 +58,7 @@
     background-color: #f2f2f2;
     padding: 40px;
     margin-top: 120px;
+    margin-left: 40px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -160,8 +165,8 @@
     flex: 1;
     background-color: #f2f2f2;
     padding: 10px;
-    margin-top: 40px;
-    margin-right: 100px;
+    margin-top: 130px;
+    margin-right: 10px;
 }
 
 .main-day-container ul {
@@ -184,6 +189,7 @@
 /* Practitioner list styles */
 #practitioner-list {
     list-style-type: none;
+    margin-left: 10px;
     padding: 0;
 }
 
